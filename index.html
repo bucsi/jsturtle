@@ -11,18 +11,19 @@
   <main>
     <canvas width="750" height="450"></canvas>
     <div id="program-area">
-      <label for="ism">ismételd</label>
-      <input type="number" id="n" name="ismetles" min="1" value="1"/>
-      <label for="ismetles">alkalommal</label>
-      <br>
-      <textarea placeholder="Írd ide a programot..."></textarea>
-      <br>
-      <button id="go">Rajzolj!</button> <button id="clear">Újrakezdés</button>
+      <div class="left">
+        <textarea placeholder="Írd ide a programot..."></textarea></div>
+      <div class="right">
+        <label for="ismetles">ismételd ennyi alkalommal:</label>
+        <input type="number" id="n" name="ismetles" min="1" value="1"/>
+        <br>
+        <button id="go">Rajzolj!</button> <button id="clear">Újrakezdés</button>
+      </div>
     </div>
   </main>
   <footer>
     <p>Készítette: Bucsánszki Tamás DZHBCX.</p>
-    <p class="right"> Forráskód a <a href="github.com/bucsi/jsturtle">GitHubon</a>.</p>
+    <p class="right"> Forráskód a <a href="https://github.com/bucsi/jsturtle">GitHubon</a>.</p>
   </footer>
 </body>
 <script src="script.js"></script>
