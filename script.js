@@ -52,11 +52,12 @@ function runProgram(){
                 console.log("drawing line")
                 ctx.beginPath();
                 ctx.fillStyle = "black";
-                let {x,y} = polarToXY(turtle.x,turtle.y, parameter, turtle.dir);
-                turtle.x = x;
-                turtle.y = y;
-                ctx.lineTo(x,y);
-                ctx.moveTo(x,y);
+                let calc = polarToXY(turtle.x,turtle.y, parameter, turtle.dir);
+                console.log(calc)
+                turtle.x = calc.x;
+                turtle.y = calc.y;
+                ctx.lineTo(turtle.x,turtle.y);
+                ctx.moveTo(turtle.x,turtle.y);
                 ctx.stroke();
                 ctx.fill();
             }else if(command === "j"){
