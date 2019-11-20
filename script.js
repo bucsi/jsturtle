@@ -1,6 +1,8 @@
+//========================================================== Változók
 const programInput = document.querySelector("textarea");
 const goBtn = document.querySelector("#go");
 const repeatChekbox = document.querySelector("#repeat");
+const clearChekbox = document.querySelector("#clear");
 const nInput = document.querySelector("#n");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -12,6 +14,8 @@ let turtle = {
     y: undefined,
     dir: undefined
 }
+
+//========================================================== Függvények
 
 function init(){
     turtle.x = cw/2;
@@ -41,8 +45,9 @@ function runProgram(){
     console.log(program)
     // ismétlések beállítása
     let n = repeatChekbox.checked ? nInput.value : 1;
-
-    init();
+    if(clearChekbox.checked){
+        init();
+    }
     // program végrehajtása
     for(let i = 0; i < n; i++){
         for(let p of program){
@@ -70,20 +75,16 @@ function runProgram(){
     ctx.stroke();
 }
 
+//========================================================== EventListenerek 
+
 goBtn.addEventListener("click", runProgram);
 
 nInput.addEventListener("change", function(){
     repeatChekbox.checked = true;
 })
 
-/* egy vonal húzása
-    ctx.clearRect(0,0,cw,ch);
-    ctx.beginPath();
-    ctx.moveTo(cw/2, ch/2);
-    let {x,y} = polarToXY(cw/2,ch/2, 100, 75);
-    console.log(x,y);
-    ctx.lineTo(x,y);
-    ctx.stroke()
-*/
+//========================================================== "main"
+
+init()
 
 
