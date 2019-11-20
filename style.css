@@ -2,10 +2,29 @@
 
 body{
     font-family: Roboto, sans-serif;
+    background-color: #111;
+    color: wheat;
 }
 
 canvas{
-    border: 1px solid red;
+    border-radius: 5px;
+    background-color: gray;
+    margin: 2em;
+}
+
+main{
+    text-align: center;
+}
+
+#n{
+    width: 2em;
+}
+
+input, textarea{
+    background-color: #111;
+    color: wheat;
+    border: 0;
+    border-bottom: 1px solid wheat;
 }
 
 footer{
