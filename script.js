@@ -13,6 +13,15 @@ let turtle = {
     dir: undefined
 }
 
+function init(){
+    turtle.x = cw/2;
+    turtle.y = ch/2;
+    turtle.dir = 0;
+    ctx.clearRect(0,0,cw,ch);
+    //ctx.strokeStyle = "black";
+    ctx.moveTo(turtle.x, turtle.y);
+}
+
 function polarToXY(currentX, currentY, step, direction){
     let x = currentX + step*Math.cos(direction*Math.PI/180);
     let y = currentY - step*Math.sin(direction*Math.PI/180);
@@ -20,17 +29,47 @@ function polarToXY(currentX, currentY, step, direction){
 } 
 
 function runProgram(){
+
     // bemenet feldokgozása és lépésekre bontása
     let program = programInput.value.replace(/; /g, ";").split(";")
     console.log(program)
     for(let i = 0; i < program.length; i++){
         program[i] = program[i].split(" ")
     }
+    console.log(program)
     // ismétlések beállítása
     let n = repeatChekbox.checked ? nInput.value : 1;
+
+    init();
+
     // program végrehajtása
     for(let i = 0; i < n; i++){
-        
+        for(let p of program){
+            console.log(p)
+            let command = p[0];
+            let parameter = Number(p[1]);
+            if(command === "e"){
+                console.log("drawing line")
+                ctx.beginPath();
+                ctx.fillStyle = "black";
+                let {x,y} = polarToXY(turtle.x,turtle.y, parameter, turtle.dir);
+                turtle.x = x;
+                turtle.y = y;
+                ctx.lineTo(x,y);
+                ctx.moveTo(x,y);
+                ctx.stroke();
+                ctx.fill();
+            }else if(command === "j"){
+                turtle.dir -= parameter;
+            }else if(command === "b"){
+                turtle.dir += parameter;
+            }else if(command === "tsz"){
+                console.log("not implemented")
+            }else{
+                console.log("ERR\tNincs ilyen parancs (" + command + " " + parameter + ")")
+            }
+            console.log(turtle)
+        }
     }
 }
 
