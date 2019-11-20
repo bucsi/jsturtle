@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body{
+    font-family: Roboto, sans-serif;
+}
+
 canvas{
     border: 1px solid red;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    column-count: 2;
+    margin-bottom: 10px;
+    width:100%
+}
+
+footer p{
+    width: 1fr;
+    margin: 0;
+}
+
+.right{
+    position: relative;
+    right: 0;
+    margin-right: 1em;
+    text-align: right;
 }

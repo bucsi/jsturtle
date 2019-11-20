@@ -8,13 +8,23 @@
   <title>JS Teknős</title>
 </head>
 <body>
-  <canvas></canvas>
-  <input type="checkbox" id="repeat" value="false" name="ism" />
-  <label for="ism">ismételd</label>
-  <input type="number" id="n" name="ismetles" width="2em"/>
-  <label for="ismetles">alkalommal</label>
-  <br>
-  <input type="textbox" id="program" placeholder="Írd ide a kódot..."/>
+  <main>
+    <canvas></canvas>
+    <div id="program-area">
+      <input type="checkbox" id="repeat" name="ism" />
+      <label for="ism">ismételd</label>
+      <input type="number" id="n" name="ismetles" width="2em"/>
+      <label for="ismetles">alkalommal</label>
+      <br>
+      <textarea placeholder="Írd ide a programot..."></textarea>
+      <br>
+      <button id="go">Rajzolj!</button>
+    </div>
+  </main>
+  <footer>
+    <p>Készítette: Bucsánszki Tamás DZHBCX.</p>
+    <p class="right"> Forráskód a <a href="github.com/bucsi/jsturtle">GitHubon</a>.</p>
+  </footer>
 </body>
 <script src="script.js"></script>
 </html>
