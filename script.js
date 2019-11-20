@@ -32,7 +32,27 @@ function polarToXY(currentX, currentY, step, direction){
     let x = currentX + step*Math.cos(direction*Math.PI/180);
     let y = currentY - step*Math.sin(direction*Math.PI/180);
     return({x,y});
-} 
+}
+
+function colorToColor(szin){
+    if(szin==="vörös"){
+        return "red";
+    }else if(szin === "narancs"){
+        return "orange";
+    }else if(szin === "sárga"){
+        return "yellow";
+    }else if(szin === "zöld"){
+        return "green";
+    }else if(szin === "kék"){
+        return "blue";
+    }else if(szin === "lila"){
+        return "purple";
+    }else if(szin === "fehér"){
+        return "white";
+    }else{
+        return "black";
+    }
+}
 
 function runProgram(){
 
@@ -53,19 +73,19 @@ function runProgram(){
         for(let p of program){
             console.log(p)
             let command = p[0];
-            let parameter = Number(p[1]);
+            let parameter = p[1];
             if(command === "e"){
-                let calc = polarToXY(turtle.x,turtle.y, parameter, turtle.dir);
+                let calc = polarToXY(turtle.x,turtle.y, Number(parameter), turtle.dir);
                 console.log(calc)
                 turtle.x = calc.x;
                 turtle.y = calc.y;
                 ctx.lineTo(turtle.x,turtle.y);
             }else if(command === "j"){
-                turtle.dir -= parameter;
+                turtle.dir -= Number(parameter);
             }else if(command === "b"){
-                turtle.dir += parameter;
+                turtle.dir += Number(parameter);
             }else if(command === "tsz"){
-                console.log("not implemented")
+                ctx.strokeStyle = colorToColor(parameter);
             }else{
                 console.log("ERR\tNincs ilyen parancs (" + command + " " + parameter + ")")
             }
