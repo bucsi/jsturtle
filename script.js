@@ -17,9 +17,11 @@ function init(){
     turtle.x = cw/2;
     turtle.y = ch/2;
     turtle.dir = 0;
+    ctx.beginPath();
     ctx.clearRect(0,0,cw,ch);
     //ctx.strokeStyle = "black";
     ctx.moveTo(turtle.x, turtle.y);
+    ctx.closePath();
 }
 
 function polarToXY(currentX, currentY, step, direction){
@@ -41,7 +43,6 @@ function runProgram(){
     let n = repeatChekbox.checked ? nInput.value : 1;
 
     init();
-
     // program végrehajtása
     for(let i = 0; i < n; i++){
         for(let p of program){
@@ -49,17 +50,11 @@ function runProgram(){
             let command = p[0];
             let parameter = Number(p[1]);
             if(command === "e"){
-                console.log("drawing line")
-                ctx.beginPath();
-                ctx.fillStyle = "black";
                 let calc = polarToXY(turtle.x,turtle.y, parameter, turtle.dir);
                 console.log(calc)
                 turtle.x = calc.x;
                 turtle.y = calc.y;
                 ctx.lineTo(turtle.x,turtle.y);
-                ctx.moveTo(turtle.x,turtle.y);
-                ctx.stroke();
-                ctx.fill();
             }else if(command === "j"){
                 turtle.dir -= parameter;
             }else if(command === "b"){
@@ -72,6 +67,7 @@ function runProgram(){
             console.log(turtle)
         }
     }
+    ctx.stroke();
 }
 
 goBtn.addEventListener("click", runProgram);
