@@ -2,7 +2,7 @@
 const programInput = document.querySelector("textarea");
 const goBtn = document.querySelector("#go");
 const repeatChekbox = document.querySelector("#repeat");
-const clearChekbox = document.querySelector("#clear");
+const clearBtn = document.querySelector("#clear");
 const nInput = document.querySelector("#n");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -64,10 +64,7 @@ function runProgram(){
     }
     console.log(program)
     // ismétlések beállítása
-    let n = repeatChekbox.checked ? nInput.value : 1;
-    if(clearChekbox.checked){
-        init();
-    }
+    let n = Number(nInput.value);
     // program végrehajtása
     for(let i = 0; i < n; i++){
         for(let p of program){
@@ -99,8 +96,12 @@ function runProgram(){
 
 goBtn.addEventListener("click", runProgram);
 
-nInput.addEventListener("change", function(){
-    repeatChekbox.checked = true;
+clearBtn.addEventListener("click", init);
+
+nInput.addEventListener("input", function(){
+    if (!Number(nInput.value) > 1){
+        nInput.value = 1;
+    }
 })
 
 //========================================================== "main"
