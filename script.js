@@ -9,6 +9,17 @@ const ctx = canvas.getContext("2d");
 const cw = canvas.width;
 const ch = canvas.height;
 
+const szinek = {
+    "fekete": "black",
+    "vörös": "red",
+    "narancs": "orange",
+    "sárga": "yellow",
+    "zöld": "green",
+    "kék": "blue",
+    "lila": "purple",
+    "fehér": "white",
+}
+
 let turtle = {
     x: undefined,
     y: undefined,
@@ -35,23 +46,11 @@ function polarToXY(currentX, currentY, step, direction){
 }
 
 function colorToColor(szin){
-    if(szin==="vörös"){
-        return "red";
-    }else if(szin === "narancs"){
-        return "orange";
-    }else if(szin === "sárga"){
-        return "yellow";
-    }else if(szin === "zöld"){
-        return "green";
-    }else if(szin === "kék"){
-        return "blue";
-    }else if(szin === "lila"){
-        return "purple";
-    }else if(szin === "fehér"){
-        return "white";
-    }else{
-        return "black";
+    szin = szinek[szin];
+    if(szin == null){
+        szin = "black";
     }
+    return szin;
 }
 
 function runProgram(){
@@ -104,8 +103,12 @@ nInput.addEventListener("input", function(){
     }
 })
 
-//========================================================== "main"
+//========================================================== "main" === -> <= != == >= ->
 
 init()
-
+console.log(Object.keys(szinek))
+let tokmindegy = szinek["alma"]
+if(tokmindegy == null){
+    console.log("Thornak igaza van?")
+}
 
