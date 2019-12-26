@@ -1,4 +1,3 @@
-//========================================================== Változók
 const programInput = document.querySelector("textarea");
 const goBtn = document.querySelector("#go");
 const repeatChekbox = document.querySelector("#repeat");
@@ -18,15 +17,22 @@ const szinek = {
     "kék": "blue",
     "lila": "purple",
     "fehér": "white",
+    "1": "black",
+    "2": "red",
+    "3": "orange",
+    "4": "yellow",
+    "5": "green",
+    "6": "blue",
+    "7": "purple",
+    "8": "white",
 }
 
 let turtle = {
     x: undefined,
     y: undefined,
-    dir: undefined
+    dir: undefined,
+    color: "black"
 }
-
-//========================================================== Függvények
 
 function init(){
     turtle.x = cw/2;
@@ -36,7 +42,7 @@ function init(){
     ctx.clearRect(0,0,cw,ch);
     //ctx.strokeStyle = "black";
     ctx.moveTo(turtle.x, turtle.y);
-    ctx.closePath();
+    //ctx.closePath();
 }
 
 function polarToXY(currentX, currentY, step, direction){
@@ -66,6 +72,7 @@ function runProgram(){
     let n = Number(nInput.value);
     // program végrehajtása
     for(let i = 0; i < n; i++){
+        // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
         for(let p of program){
             console.log(p)
             let command = p[0];
@@ -73,22 +80,26 @@ function runProgram(){
             if(command === "e"){
                 let calc = polarToXY(turtle.x,turtle.y, Number(parameter), turtle.dir);
                 console.log(calc)
+                ctx.beginPath();
+                ctx.moveTo(turtle.x, turtle.y);
                 turtle.x = calc.x;
                 turtle.y = calc.y;
                 ctx.lineTo(turtle.x,turtle.y);
+                ctx.strokeStyle = turtle.color;
+                ctx.stroke();
             }else if(command === "j"){
                 turtle.dir -= Number(parameter);
             }else if(command === "b"){
                 turtle.dir += Number(parameter);
             }else if(command === "tsz"){
-                ctx.strokeStyle = colorToColor(parameter);
+                turtle.color = colorToColor(parameter);
             }else{
                 console.log("ERR\tNincs ilyen parancs (" + command + " " + parameter + ")")
             }
             console.log(turtle)
         }
     }
-    ctx.stroke();
+    
 }
 
 //========================================================== EventListenerek 
