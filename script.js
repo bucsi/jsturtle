@@ -40,9 +40,7 @@ function init(){
     turtle.dir = 0;
     ctx.beginPath();
     ctx.clearRect(0,0,cw,ch);
-    //ctx.strokeStyle = "black";
     ctx.moveTo(turtle.x, turtle.y);
-    //ctx.closePath();
 }
 
 function polarToXY(currentX, currentY, step, direction){
@@ -51,35 +49,29 @@ function polarToXY(currentX, currentY, step, direction){
     return({x,y});
 }
 
-function colorToColor(szin){
-    szin = szinek[szin];
-    if(szin == null){
-        szin = "black";
+function colorToColor(col){
+    newColor = szinek[col];
+    if(newColor == null){
+        alert('Nincs "' + col + '" szín, alapértelmezett feketével folytatom...')
+        newColor = "black";
     }
-    return szin;
+    return newColor;
 }
 
 function runProgram(){
-
-    // bemenet feldokgozása és lépésekre bontása
     let program = programInput.value.replace(/; /g, ";").split(";")
-    console.log(program)
     for(let i = 0; i < program.length; i++){
         program[i] = program[i].split(" ")
     }
-    console.log(program)
     // ismétlések beállítása
-    let n = Number(nInput.value);
+    let repeats = Number(nInput.value);
     // program végrehajtása
-    for(let i = 0; i < n; i++){
-        // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo
+    for(let i = 0; i < repeats; i++){
         for(let p of program){
-            console.log(p)
             let command = p[0];
             let parameter = p[1];
             if(command === "e"){
                 let calc = polarToXY(turtle.x,turtle.y, Number(parameter), turtle.dir);
-                console.log(calc)
                 ctx.beginPath();
                 ctx.moveTo(turtle.x, turtle.y);
                 turtle.x = calc.x;
@@ -94,32 +86,18 @@ function runProgram(){
             }else if(command === "tsz"){
                 turtle.color = colorToColor(parameter);
             }else{
-                console.log("ERR\tNincs ilyen parancs (" + command + " " + parameter + ")")
+                alert("ismeretlen utasítás (" + command + " " + parameter + ") kihagyva")
             }
-            console.log(turtle)
         }
     }
-    
 }
 
-//========================================================== EventListenerek 
-
 goBtn.addEventListener("click", runProgram);
-
 clearBtn.addEventListener("click", init);
-
 nInput.addEventListener("input", function(){
     if (!Number(nInput.value) > 1){
         nInput.value = 1;
     }
 })
 
-//========================================================== "main" === -> <= != == >= ->
-
 init()
-console.log(Object.keys(szinek))
-let tokmindegy = szinek["alma"]
-if(tokmindegy == null){
-    console.log("Thornak igaza van?")
-}
-
